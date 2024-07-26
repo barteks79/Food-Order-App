@@ -14,3 +14,10 @@ body {
 	height: 100vh;
 	background-color: #262114fc;
 }
+
+#root {
+	display: block;
+	width: 80%;
+	margin: 0 auto;
+	max-width: 1400px;
+}
