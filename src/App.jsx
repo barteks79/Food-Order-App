@@ -26,7 +26,7 @@ function App() {
 			});
 
 			if (!updatedCart.find(item => item.id === dish.id)) {
-				updatedCart.push({ id: dish.id, name: dish.name, quantity: 1 });
+				updatedCart.push({ id: dish.id, quantity: 1 });
 			}
 
 			return updatedCart;
