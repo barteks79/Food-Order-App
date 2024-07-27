@@ -5,7 +5,11 @@ export default {
 		extend: {
 			colors: {
 				primary: '#e29e15',
+				'primary-light': '#dea80d',
 				secondary: 'rgba(60, 52, 11, 0.35)',
+			},
+			boxShadow: {
+				'3xl': '0px 0px 10px rgba(0, 0, 0, 0.5)',
 			},
 		},
 	},
