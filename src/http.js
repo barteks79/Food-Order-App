@@ -1,4 +1,4 @@
-export async function fetchAvaliableMeals() {
+export async function fetchAvailableMeals() {
 	const response = await fetch('http://localhost:3000/meals');
 	const responseData = await response.json();
 
