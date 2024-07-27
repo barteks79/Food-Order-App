@@ -17,8 +17,19 @@ function App() {
 
 	function handleAddToCart(dish) {
 		setUserCart(prevCart => {
-			const prevQuantity = +prevCart.find(item => item.dish.id === dish.id).quantity || 0;
-			return [...prevCart, { dish, quantity: prevQuantity + 1 }];
+			const updatedCart = prevCart.map(item => {
+				if (item.id === dish.id) {
+					return { ...item, quantity: item.quantity + 1 };
+				} else {
+					return item;
+				}
+			});
+
+			if (!updatedCart.find(item => item.id === dish.id)) {
+				updatedCart.push({ id: dish.id, name: dish.name, quantity: 1 });
+			}
+
+			return updatedCart;
 		});
 	}
 

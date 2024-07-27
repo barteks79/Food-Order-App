@@ -1,6 +1,6 @@
 import Button from './Button';
 
-export default function Dish({ name, price, description, image }) {
+export default function Dish({ mealData, name, price, description, image }) {
 	return (
 		<div className="flex flex-col w-3/12 bg-neutral-900 rounded-xl shadow-3xl">
 			<img className="rounded-ss-xl rounded-se-xl" src={`http://localhost:3000/${image}`} alt="Dish image" />
@@ -8,7 +8,7 @@ export default function Dish({ name, price, description, image }) {
 				<h2 className="text-2xl font-semibold pb-1">{name}</h2>
 				<p className="rounded-md text-primary font-medium px-10 py-2 bg-secondary text-lg">${price}</p>
 				<p className="pt-3 pb-5 px-6 text-center text-lg h-36">{description}</p>
-				<Button>
+				<Button meal={mealData}>
 					<p className="text-xl">Add to Cart</p>
 				</Button>
 			</div>

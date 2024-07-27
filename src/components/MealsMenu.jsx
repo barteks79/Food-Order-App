@@ -8,7 +8,7 @@ export default function MealsMenu() {
 	return (
 		<main className="flex flex-wrap justify-center gap-8 pb-24">
 			{isFetching && <p className="pt-96 text-xl text-white">Loading avaliable meals...</p>}
-			{!isFetching && availableMeals.map(meal => <Dish key={meal.id} {...meal} />)}
+			{!isFetching && availableMeals.map(meal => <Dish key={meal.id} mealData={meal} {...meal} />)}
 		</main>
 	);
 }
