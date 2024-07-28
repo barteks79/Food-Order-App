@@ -3,6 +3,7 @@ import Header from './components/Header.jsx';
 import MealsMenu from './components/MealsMenu.jsx';
 import Modal from './components/Modal.jsx';
 import Cart from './components/Cart.jsx';
+import Checkout from './components/Checkout.jsx';
 
 export const CartContext = createContext({
 	userCart: [],
@@ -81,7 +82,8 @@ function App() {
 			<Header />
 			<MealsMenu />
 			<Modal label="Your Cart" buttonName="Go to Checkout">
-				<Cart />
+				{/* <Cart /> */}
+				<Checkout />
 			</Modal>
 		</CartContext.Provider>
 	);

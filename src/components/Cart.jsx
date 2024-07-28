@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { CartContext } from '../App';
 import CartButtons from './CartButtons';
-import { currencyFormatter } from '../util/util';
+import { currencyFormatter } from '../util/currency';
 
 export default function Cart() {
 	const { userCart } = useContext(CartContext);
