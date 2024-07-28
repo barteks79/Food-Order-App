@@ -50,7 +50,6 @@ function App() {
 	};
 
 	const handleToggleModal = () => {
-		console.log('changed modal');
 		setIsModalShown(prevModal => !prevModal);
 	};
 
