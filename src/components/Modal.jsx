@@ -14,17 +14,21 @@ export default function Modal({ label, children, buttonName }) {
 		return () => modal.close();
 	}, [isModalShown]);
 
+	const modalClass = isModalShown ? 'flex justify-center items-center h-full bg-transparent w-full' : '';
+
 	return createPortal(
-		<dialog onClose={handleToggleModal} ref={dialog}>
-			<h1>{label}</h1>
-			{children}
-			<div>
-				<button onClick={() => dialog.current.close()}>
-					<p>Close</p>
-				</button>
-				<Button>
-					<p>{buttonName}</p>
-				</Button>
+		<dialog className={modalClass} onClose={handleToggleModal} ref={dialog}>
+			<div className="bg-light-grey w-2/5 rounded-lg shadow-3xl py-10 px-10">
+				<h1 className="text-2xl font-bold">{label}</h1>
+				{children}
+				<div className="flex justify-end gap-2">
+					<button className="text-lg px-5" onClick={() => dialog.current.close()}>
+						<p>Close</p>
+					</button>
+					<Button>
+						<p>{buttonName}</p>
+					</Button>
+				</div>
 			</div>
 		</dialog>,
 		document.getElementById('modal')

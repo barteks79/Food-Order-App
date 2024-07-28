@@ -64,7 +64,7 @@ function App() {
 		<CartContext.Provider value={contextValue}>
 			<Header />
 			<MealsMenu />
-			<Modal label="Your Cart" buttonName="Go to Checkout" />
+			<Modal label="Your Cart" buttonName="Go to Checkout"></Modal>
 		</CartContext.Provider>
 	);
 }
