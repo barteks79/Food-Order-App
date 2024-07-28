@@ -2,6 +2,7 @@ import { useState, createContext } from 'react';
 import Header from './components/Header.jsx';
 import MealsMenu from './components/MealsMenu.jsx';
 import Modal from './components/Modal.jsx';
+import Cart from './components/Cart.jsx';
 
 export const CartContext = createContext({
 	userCart: [],
@@ -64,7 +65,9 @@ function App() {
 		<CartContext.Provider value={contextValue}>
 			<Header />
 			<MealsMenu />
-			<Modal label="Your Cart" buttonName="Go to Checkout"></Modal>
+			<Modal label="Your Cart" buttonName="Go to Checkout">
+				<Cart />
+			</Modal>
 		</CartContext.Provider>
 	);
 }
