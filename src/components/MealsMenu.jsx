@@ -3,7 +3,7 @@ import { fetchAvailableMeals } from '../http';
 import Dish from './Dish';
 
 export default function MealsMenu() {
-	const { isFetching, userData: availableMeals, error } = useFetch(fetchAvailableMeals, []);
+	const { isFetching, userData: availableMeals } = useFetch(fetchAvailableMeals, []);
 
 	return (
 		<main className="flex flex-wrap justify-center gap-8 pb-24">
