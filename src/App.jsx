@@ -10,6 +10,7 @@ export const CartContext = createContext({
 	handleToggleModal: () => {},
 	handleAddToCart: () => {},
 	handleRemoveFromCart: () => {},
+	handleChangeQuantity: () => {},
 });
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
 			});
 
 			if (!updatedCart.find(item => item.id === dish.id)) {
-				updatedCart.push({ id: dish.id, quantity: 1 });
+				updatedCart.push({ id: dish.id, name: dish.name, price: +dish.price, quantity: 1 });
 			}
 
 			return updatedCart;
@@ -53,12 +54,27 @@ function App() {
 		setIsModalShown(prevModal => !prevModal);
 	};
 
+	const handleChangeQuantity = (dish, quantity) => {
+		setUserCart(prevCart => {
+			const updatedCart = prevCart.map(item => {
+				if (item.id === dish.id) {
+					return { ...item, quantity: item.quantity + quantity };
+				} else {
+					return item;
+				}
+			});
+
+			return updatedCart.filter(item => item.quantity > 0);
+		});
+	};
+
 	const contextValue = {
 		userCart,
 		isModalShown,
 		handleToggleModal,
 		handleAddToCart,
 		handleRemoveFromCart,
+		handleChangeQuantity,
 	};
 
 	return (
