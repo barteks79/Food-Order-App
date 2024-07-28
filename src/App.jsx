@@ -5,6 +5,7 @@ import MealsMenu from './components/MealsMenu.jsx';
 export const CartContext = createContext({
 	userCart: [],
 	handleAddToCart: () => {},
+	handleRemoveFromCart: () => {},
 });
 
 function App() {
@@ -13,9 +14,10 @@ function App() {
 	const contextValue = {
 		userCart,
 		handleAddToCart,
+		handleRemoveFromCart,
 	};
 
-	function handleAddToCart(dish) {
+	const handleAddToCart = dish => {
 		setUserCart(prevCart => {
 			const updatedCart = prevCart.map(item => {
 				if (item.id === dish.id) {
@@ -31,7 +33,21 @@ function App() {
 
 			return updatedCart;
 		});
-	}
+	};
+
+	const handleRemoveFromCart = dish => {
+		setUserCart(prevCart => {
+			const updatedCart = prevCart.map(item => {
+				if (item.id === dish.id) {
+					return { ...item, quantity: item.quantity - 1 };
+				} else {
+					return item;
+				}
+			});
+
+			return updatedCart.filter(item => item.quantity > 0);
+		});
+	};
 
 	return (
 		<CartContext.Provider value={contextValue}>

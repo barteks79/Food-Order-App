@@ -11,7 +11,7 @@ export default function Header() {
 				<img className="border-4 border-primary rounded-full h-28" src="../src/assets/logo.jpg" alt="reactfood logo" />
 				<h1 className="text-primary uppercase font-semibold text-4xl tracking-wide">reactfood</h1>
 			</div>
-			<Button>
+			<Button isAddToCart={false}>
 				<p className="text-2xl">Cart ({userCart.length})</p>
 			</Button>
 		</header>

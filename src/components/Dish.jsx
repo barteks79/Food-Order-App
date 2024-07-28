@@ -8,7 +8,7 @@ export default function Dish({ mealData, name, price, description, image }) {
 				<h2 className="text-2xl font-semibold pb-1">{name}</h2>
 				<p className="rounded-md text-primary font-medium px-10 py-2 bg-secondary text-lg">${price}</p>
 				<p className="pt-3 pb-5 px-6 text-center text-lg h-36">{description}</p>
-				<Button meal={mealData}>
+				<Button meal={mealData} isAddToCart={true}>
 					<p className="text-xl">Add to Cart</p>
 				</Button>
 			</div>
