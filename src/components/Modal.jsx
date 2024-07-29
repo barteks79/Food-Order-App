@@ -4,17 +4,17 @@ import { CartContext } from '../App';
 import Button from './Button';
 
 export default function Modal({ label, children, buttonName }) {
-	const { isModalShown, handleToggleModal } = useContext(CartContext);
+	const { modalData, handleToggleModal, handleModalSectionChange } = useContext(CartContext);
 	const dialog = useRef();
 
 	useEffect(() => {
 		const modal = dialog.current;
 
-		isModalShown && modal.showModal();
+		modalData.isShown && modal.showModal();
 		return () => modal.close();
-	}, [isModalShown]);
+	}, [modalData.isShown]);
 
-	const modalClass = isModalShown ? 'flex justify-center items-center h-full bg-transparent w-full' : '';
+	const modalClass = modalData.isShown ? 'flex justify-center items-center h-full bg-transparent w-full' : '';
 
 	return createPortal(
 		<dialog className={modalClass} onClose={handleToggleModal} ref={dialog}>
@@ -25,7 +25,7 @@ export default function Modal({ label, children, buttonName }) {
 					<button className="text-lg px-5" onClick={() => dialog.current.close()}>
 						<p>Close</p>
 					</button>
-					<Button>
+					<Button onButtonClick={modalData.section === 'cart' ? handleModalSectionChange : ''}>
 						<p>{buttonName}</p>
 					</Button>
 				</div>

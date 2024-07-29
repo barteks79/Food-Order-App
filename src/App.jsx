@@ -7,8 +7,9 @@ import Checkout from './components/Checkout.jsx';
 
 export const CartContext = createContext({
 	userCart: [],
-	isModalShown: false,
+	modalData: {},
 	handleToggleModal: () => {},
+	handleModalSectionChange: () => {},
 	handleAddToCart: () => {},
 	handleRemoveFromCart: () => {},
 	handleChangeQuantity: () => {},
@@ -16,7 +17,10 @@ export const CartContext = createContext({
 
 function App() {
 	const [userCart, setUserCart] = useState([]);
-	const [isModalShown, setIsModalShown] = useState(false);
+	const [modalData, setModalData] = useState({
+		isShown: false,
+		section: 'cart',
+	});
 
 	const handleAddToCart = dish => {
 		setUserCart(prevCart => {
@@ -51,7 +55,15 @@ function App() {
 	};
 
 	const handleToggleModal = () => {
-		setIsModalShown(prevModal => !prevModal);
+		setModalData(prevModal => {
+			return { isShown: !prevModal.isShown, section: 'cart' };
+		});
+	};
+
+	const handleModalSectionChange = () => {
+		setModalData(prevModal => {
+			return { ...prevModal, section: 'checkout' };
+		});
 	};
 
 	const handleChangeQuantity = (dish, quantity) => {
@@ -70,8 +82,9 @@ function App() {
 
 	const contextValue = {
 		userCart,
-		isModalShown,
+		modalData,
 		handleToggleModal,
+		handleModalSectionChange,
 		handleAddToCart,
 		handleRemoveFromCart,
 		handleChangeQuantity,
@@ -81,9 +94,10 @@ function App() {
 		<CartContext.Provider value={contextValue}>
 			<Header />
 			<MealsMenu />
-			<Modal label="Your Cart" buttonName="Go to Checkout">
-				<Cart />
-				<Checkout />
+			<Modal
+				label={modalData.section === 'cart' ? 'Your Cart' : 'Checkout'}
+				buttonName={modalData.section === 'cart' ? 'Go to Checkout' : 'Submit Order'}>
+				{modalData.section === 'cart' ? <Cart /> : <Checkout />}
 			</Modal>
 		</CartContext.Provider>
 	);
