@@ -2,8 +2,6 @@ import { useState, createContext } from 'react';
 import Header from './components/Header.jsx';
 import MealsMenu from './components/MealsMenu.jsx';
 import Modal from './components/Modal.jsx';
-import Cart from './components/Cart.jsx';
-import Checkout from './components/Checkout.jsx';
 
 export const CartContext = createContext({
 	userCart: [],

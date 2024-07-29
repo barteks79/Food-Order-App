@@ -1,48 +1,53 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { CartContext } from '../App';
 import { currencyFormatter } from '../utils/currency';
 import useInput from '../hooks/use-input';
 import { isEmail, isNotEmpty } from '../utils/validation';
 import Input from './Input';
 
-export default function Checkout() {
+export default function Checkout({ handleChangeValues }) {
 	const { userCart } = useContext(CartContext);
 	const totalPrice = userCart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
 	const {
-		enetedValue: eneterdName,
+		enteredValue: name,
 		hasError: nameHasError,
 		handleInputChange: handleNameChange,
 		handleInputBlur: handleNameBlur,
 	} = useInput('', isNotEmpty);
 
 	const {
-		enetedValue: eneterdEmail,
+		enteredValue: email,
 		hasError: emailHasError,
 		handleInputChange: handleEmailChange,
 		handleInputBlur: handleEmailBlur,
 	} = useInput('', value => isNotEmpty(value) && isEmail(value));
 
 	const {
-		enetedValue: eneterdStreet,
+		enteredValue: street,
 		hasError: streetHasError,
 		handleInputChange: handleStreetChange,
 		handleInputBlur: handleStreetBlur,
 	} = useInput('', isNotEmpty);
 
 	const {
-		enetedValue: eneterdPostCode,
+		enteredValue: postalCode,
 		hasError: postCodeHasError,
 		handleInputChange: handlePostCodeChange,
 		handleInputBlur: handlePostCodeBlur,
 	} = useInput('', isNotEmpty);
 
 	const {
-		enetedValue: eneterdCity,
+		enteredValue: city,
 		hasError: cityHasError,
 		handleInputChange: handleCityChange,
 		handleInputBlur: handleCityBlur,
 	} = useInput('', isNotEmpty);
+
+	useEffect(
+		() => handleChangeValues({ name, email, street, postalCode, city }),
+		[name, email, street, postalCode, city]
+	);
 
 	return (
 		<form className="flex flex-col gap-5 pb-6">
@@ -53,7 +58,7 @@ export default function Checkout() {
 				label="Full Name"
 				name="full-name"
 				type="text"
-				value={eneterdName}
+				value={name}
 				hasError={nameHasError}
 				onChange={handleNameChange}
 				onBlur={handleNameBlur}
@@ -64,7 +69,7 @@ export default function Checkout() {
 				label="E-Mail Address"
 				name="email"
 				type="email"
-				value={eneterdEmail}
+				value={email}
 				hasError={emailHasError}
 				onChange={handleEmailChange}
 				onBlur={handleEmailBlur}
@@ -75,7 +80,7 @@ export default function Checkout() {
 				label="Street"
 				name="street"
 				type="text"
-				value={eneterdStreet}
+				value={street}
 				hasError={streetHasError}
 				onChange={handleStreetChange}
 				onBlur={handleStreetBlur}
@@ -87,7 +92,7 @@ export default function Checkout() {
 					label="Postal Code"
 					name="postal-code"
 					type="text"
-					value={eneterdPostCode}
+					value={postalCode}
 					hasError={postCodeHasError}
 					onChange={handlePostCodeChange}
 					onBlur={handlePostCodeBlur}
@@ -99,7 +104,7 @@ export default function Checkout() {
 					label="City"
 					name="city"
 					type="text"
-					value={eneterdCity}
+					value={city}
 					hasError={cityHasError}
 					onChange={handleCityChange}
 					onBlur={handleCityBlur}
