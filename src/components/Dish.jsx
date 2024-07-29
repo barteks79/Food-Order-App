@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { CartContext } from '../App';
-import { currencyFormatter } from '../util/currency';
+import { currencyFormatter } from '../utils/currency';
 import Button from './Button';
 
 export default function Dish({ mealData, name, price, description, image }) {

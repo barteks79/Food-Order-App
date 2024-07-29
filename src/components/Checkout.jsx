@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { CartContext } from '../App';
-import { currencyFormatter } from '../util/currency';
+import { currencyFormatter } from '../utils/currency';
 import useInput from '../hooks/use-input';
-import { isEmail, isNotEmpty } from '../util/validation';
+import { isEmail, isNotEmpty } from '../utils/validation';
 import Input from './Input';
 
 export default function Checkout() {
