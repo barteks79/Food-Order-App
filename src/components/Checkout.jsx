@@ -1,8 +1,14 @@
+import { useContext } from 'react';
+import { CartContext } from '../App';
+import { currencyFormatter } from '../util/currency';
 import useInput from '../hooks/use-input';
 import { isEmail, isNotEmpty } from '../util/validation';
 import Input from './Input';
 
 export default function Checkout() {
+	const { userCart } = useContext(CartContext);
+	const totalPrice = userCart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
 	const {
 		enetedValue: eneterdName,
 		hasError: nameHasError,
@@ -40,7 +46,7 @@ export default function Checkout() {
 
 	return (
 		<div className="flex flex-col gap-5 pb-6">
-			<p className="text-lg pt-4">Total Amount: $89.45</p>
+			<p className="text-lg pt-4">Total Amount: {currencyFormatter.format(totalPrice)}</p>
 
 			<Input
 				id="full-name"

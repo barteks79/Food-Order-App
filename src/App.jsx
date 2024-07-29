@@ -82,7 +82,7 @@ function App() {
 			<Header />
 			<MealsMenu />
 			<Modal label="Your Cart" buttonName="Go to Checkout">
-				{/* <Cart /> */}
+				<Cart />
 				<Checkout />
 			</Modal>
 		</CartContext.Provider>
