@@ -45,7 +45,7 @@ export default function Checkout() {
 	} = useInput('', isNotEmpty);
 
 	return (
-		<div className="flex flex-col gap-5 pb-6">
+		<form className="flex flex-col gap-5 pb-6">
 			<p className="text-lg pt-4">Total Amount: {currencyFormatter.format(totalPrice)}</p>
 
 			<Input
@@ -106,6 +106,6 @@ export default function Checkout() {
 					width="w-full"
 				/>
 			</div>
-		</div>
+		</form>
 	);
 }

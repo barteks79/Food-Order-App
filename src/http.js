@@ -8,3 +8,5 @@ export async function fetchAvailableMeals() {
 
 	return responseData;
 }
+
+export async function submitOrder() {}

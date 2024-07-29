@@ -94,11 +94,7 @@ function App() {
 		<CartContext.Provider value={contextValue}>
 			<Header />
 			<MealsMenu />
-			<Modal
-				label={modalData.section === 'cart' ? 'Your Cart' : 'Checkout'}
-				buttonName={modalData.section === 'cart' ? 'Go to Checkout' : 'Submit Order'}>
-				{modalData.section === 'cart' ? <Cart /> : <Checkout />}
-			</Modal>
+			<Modal />
 		</CartContext.Provider>
 	);
 }
