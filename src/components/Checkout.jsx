@@ -39,8 +39,8 @@ export default function Checkout() {
 	} = useInput('', isNotEmpty);
 
 	return (
-		<div>
-			<p>Total Amount: $89.45</p>
+		<div className="flex flex-col gap-5 pb-6">
+			<p className="text-lg pt-4">Total Amount: $89.45</p>
 
 			<Input
 				id="full-name"
@@ -75,7 +75,7 @@ export default function Checkout() {
 				onBlur={handleStreetBlur}
 			/>
 
-			<div>
+			<div className="flex gap-8">
 				<Input
 					id="postal-code"
 					label="Postal Code"
@@ -85,6 +85,7 @@ export default function Checkout() {
 					hasError={postCodeHasError}
 					onChange={handlePostCodeChange}
 					onBlur={handlePostCodeBlur}
+					width="w-full"
 				/>
 
 				<Input
@@ -96,6 +97,7 @@ export default function Checkout() {
 					hasError={cityHasError}
 					onChange={handleCityChange}
 					onBlur={handleCityBlur}
+					width="w-full"
 				/>
 			</div>
 		</div>
