@@ -1,5 +1,4 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import { submitOrder } from '../http';
 import { createPortal } from 'react-dom';
 import { CartContext } from '../App';
 import Button from './Button';
@@ -7,20 +6,19 @@ import Cart from './Cart';
 import Checkout from './Checkout';
 import useHttp from '../hooks/use-http';
 
-// const requestConfig = {
-// 	method: 'POST',
-// 	headers: {
-// 		'Content-Type': 'application/json',
-// 	},
-// 	body: JSON.stringify({ order }),
-// };
+const requestConfig = {
+	method: 'POST',
+	headers: {
+		'Content-Type': 'application/json',
+	},
+};
 
 export default function Modal() {
 	const [inputValues, setInputValues] = useState({});
 	const { userCart, modalData, handleToggleModal, handleModalSectionChange } = useContext(CartContext);
 	const dialog = useRef();
 
-	// const { isLoading, error, sendRequest } = useHttp('http://localhost:3000/orders', requestConfig);
+	const { isLoading, error, sendRequest } = useHttp('http://localhost:3000/orders', requestConfig);
 
 	const handleChangeValues = values => {
 		setInputValues({
@@ -29,14 +27,16 @@ export default function Modal() {
 	};
 
 	const handleSubmitOrder = () => {
-		const orderData = {
-			items: [...userCart],
-			customer: {
-				...inputValues,
+		const orderData = JSON.stringify({
+			order: {
+				items: [...userCart],
+				customer: {
+					...inputValues,
+				},
 			},
-		};
+		});
 
-		submitOrder(orderData);
+		sendRequest(orderData);
 		dialog.current.close();
 	};
 
