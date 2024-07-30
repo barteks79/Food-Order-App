@@ -19,9 +19,7 @@ export default function Modal() {
 
 	const handleSubmitOrder = () => {
 		const orderData = {
-			items: {
-				...userCart,
-			},
+			items: [...userCart],
 			customer: {
 				...inputValues,
 			},
