@@ -11,6 +11,7 @@ export const CartContext = createContext({
 	handleAddToCart: () => {},
 	handleRemoveFromCart: () => {},
 	handleChangeQuantity: () => {},
+	resetUserCart: () => {},
 });
 
 function App() {
@@ -58,9 +59,9 @@ function App() {
 		});
 	};
 
-	const handleModalSectionChange = () => {
+	const handleModalSectionChange = section => {
 		setModalData(prevModal => {
-			return { ...prevModal, section: 'checkout' };
+			return { ...prevModal, section };
 		});
 	};
 
@@ -78,6 +79,10 @@ function App() {
 		});
 	};
 
+	const resetUserCart = () => {
+		setUserCart([]);
+	};
+
 	const contextValue = {
 		userCart,
 		modalData,
@@ -86,6 +91,7 @@ function App() {
 		handleAddToCart,
 		handleRemoveFromCart,
 		handleChangeQuantity,
+		resetUserCart,
 	};
 
 	return (

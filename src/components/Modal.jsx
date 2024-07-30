@@ -5,6 +5,7 @@ import Button from './Button';
 import Cart from './Cart';
 import Checkout from './Checkout';
 import useHttp from '../hooks/use-http';
+import Error from './Error';
 
 const requestConfig = {
 	method: 'POST',
@@ -15,10 +16,20 @@ const requestConfig = {
 
 export default function Modal() {
 	const [inputValues, setInputValues] = useState({});
-	const { userCart, modalData, handleToggleModal, handleModalSectionChange } = useContext(CartContext);
+	const { userCart, modalData, handleToggleModal, handleModalSectionChange, resetUserCart } = useContext(CartContext);
 	const dialog = useRef();
 
-	const { isLoading, error, sendRequest } = useHttp('http://localhost:3000/orders', requestConfig);
+	const { data, setData, isLoading, error, setError, sendRequest } = useHttp(
+		'http://localhost:3000/orders',
+		requestConfig
+	);
+
+	const onCloseButtonClick = () => {
+		dialog.current.close();
+		handleModalSectionChange('cart');
+		setError();
+		setData();
+	};
 
 	const handleChangeValues = values => {
 		setInputValues({
@@ -37,7 +48,7 @@ export default function Modal() {
 		});
 
 		sendRequest(orderData);
-		dialog.current.close();
+		resetUserCart();
 	};
 
 	useEffect(() => {
@@ -54,17 +65,31 @@ export default function Modal() {
 			<div className="bg-light-grey w-1/3 rounded-lg shadow-3xl py-10 px-10">
 				<h1 className="text-2xl font-bold">{modalData.section === 'cart' ? 'Your Cart' : 'Checkout'}</h1>
 
-				{modalData.section === 'cart' ? <Cart /> : <Checkout handleChangeValues={handleChangeValues} />}
+				{!data && modalData.section === 'cart' && <Cart />}
+				{!data && modalData.section === 'checkout' && <Checkout handleChangeValues={handleChangeValues} />}
+				{data && !error && <p className="text-xl text-center font-medium py-8">Order submitted successfully!</p>}
 
-				<div className="flex justify-end gap-2">
-					<button className="text-lg px-5" onClick={() => dialog.current.close()}>
-						<p>Close</p>
-					</button>
+				{error && (
+					<Error textColor="black" title="Failed to submit order" message={error}>
+						{error}
+					</Error>
+				)}
 
-					<Button onButtonClick={modalData.section === 'cart' ? handleModalSectionChange : handleSubmitOrder}>
-						<p>{modalData.section === 'cart' ? 'Go to Checkout' : 'Submit Order'}</p>
-					</Button>
-				</div>
+				{isLoading && <p className="text-xl text-end font-medium pt-8">Sending order...</p>}
+				{!isLoading && (
+					<div className="flex justify-end gap-2">
+						<button className="text-lg px-5" onClick={onCloseButtonClick}>
+							<p>Close</p>
+						</button>
+
+						{!data && (
+							<Button
+								onButtonClick={modalData.section === 'cart' ? () => handleModalSectionChange('checkout') : handleSubmitOrder}>
+								<p>{modalData.section === 'cart' ? 'Go to Checkout' : 'Submit Order'}</p>
+							</Button>
+						)}
+					</div>
+				)}
 			</div>
 		</dialog>,
 		document.getElementById('modal')

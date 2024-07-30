@@ -36,5 +36,5 @@ export default function useHttp(url, config, initialData) {
 		}
 	}, [sendRequest, config]);
 
-	return { data, isLoading, error, sendRequest };
+	return { data, setData, isLoading, error, setError, sendRequest };
 }
