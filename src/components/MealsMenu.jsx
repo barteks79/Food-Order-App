@@ -1,13 +1,14 @@
 import useHttp from '../hooks/use-http.js';
 import Dish from './Dish';
+import Error from './Error.jsx';
 
 const requestConfig = {};
 
 export default function MealsMenu() {
-	const { isLoading, data: availableMeals, error } = useHttp('http://loalhost:3000/meals', requestConfig, []);
+	const { isLoading, data: availableMeals, error } = useHttp('http://loalhosts:3000/meals', requestConfig, []);
 
 	if (error) {
-		return <p className="pt-96 text-xl text-white">{error.message}</p>;
+		return <Error title="Failed to fetch meals." message={error} />;
 	}
 
 	return (

@@ -5,11 +5,22 @@ import { CartContext } from '../App';
 import Button from './Button';
 import Cart from './Cart';
 import Checkout from './Checkout';
+import useHttp from '../hooks/use-http';
+
+// const requestConfig = {
+// 	method: 'POST',
+// 	headers: {
+// 		'Content-Type': 'application/json',
+// 	},
+// 	body: JSON.stringify({ order }),
+// };
 
 export default function Modal() {
 	const [inputValues, setInputValues] = useState({});
 	const { userCart, modalData, handleToggleModal, handleModalSectionChange } = useContext(CartContext);
 	const dialog = useRef();
+
+	// const { isLoading, error, sendRequest } = useHttp('http://localhost:3000/orders', requestConfig);
 
 	const handleChangeValues = values => {
 		setInputValues({
